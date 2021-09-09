@@ -29,37 +29,3 @@ dependencies {
     implementation 'com.github.lucky-sheep:KotlinExt:1.0.0'
     implementation 'com.contrarywind:Android-PickerView:4.1.9'
 }
-
-def sourcesJar = task("sourcesJar", type: Jar) {
-    getArchiveClassifier().set('sources')
-    from android.sourceSets.main.java.srcDirs
-}
-
-publishing {
-    publications {
-        aar(MavenPublication) {
-            groupId "com.hunliji"
-            version = android.defaultConfig.versionName
-            artifactId project.getProject().getName()
-            artifact sourcesJar
-            artifact("$buildDir/outputs/aar/${project.getProject().getName()}-release.aar")
-        }
-    }
-}
-
-artifactory {
-    contextUrl = "http://172.16.12.102:8081/artifactory"
-    publish {
-        repository {
-            repoKey = 'libs-release-local'
-            username = "admin"
-            password = "iwerther"
-        }
-        defaults {
-            publications('aar')
-            publishArtifacts = true
-            properties = ['qa.level': 'basic', 'dev.team': 'core']
-            publishPom = true
-        }
-    }
-}
