@@ -1,0 +1,65 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.jfrog.artifactory'
+apply plugin: 'maven-publish'
+android {
+    compileSdkVersion 28
+
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 28
+        versionCode 53
+        versionName "1.0.53"
+    }
+
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.50"
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'com.hunliji:integration-mw:1.0.2'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
+    implementation 'com.hunliji:ext-mw:1.0.34'
+    implementation 'com.contrarywind:Android-PickerView:4.1.9'
+}
+
+def sourcesJar = task("sourcesJar", type: Jar) {
+    getArchiveClassifier().set('sources')
+    from android.sourceSets.main.java.srcDirs
+}
+
+publishing {
+    publications {
+        aar(MavenPublication) {
+            groupId "com.hunliji"
+            version = android.defaultConfig.versionName
+            artifactId project.getProject().getName()
+            artifact sourcesJar
+            artifact("$buildDir/outputs/aar/${project.getProject().getName()}-release.aar")
+        }
+    }
+}
+
+artifactory {
+    contextUrl = "http://172.16.12.102:8081/artifactory"
+    publish {
+        repository {
+            repoKey = 'libs-release-local'
+            username = "admin"
+            password = "iwerther"
+        }
+        defaults {
+            publications('aar')
+            publishArtifacts = true
+            properties = ['qa.level': 'basic', 'dev.team': 'core']
+            publishPom = true
+        }
+    }
+}

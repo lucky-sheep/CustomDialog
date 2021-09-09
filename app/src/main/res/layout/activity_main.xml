@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <import type="android.text.TextUtils" />
+
+        <variable
+            name="vm"
+            type="com.hunliji.mvvm.activity.MainVm" />
+
+        <variable
+            name="v"
+            type="com.hunliji.mvvm.activity.MainActivity" />
+
+        <import type="com.hunliji.hlj_image.RoundedCornersTransformation.CornerType" />
+
+        <import type="android.widget.ImageView.ScaleType" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/base"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/ll"
+            android:background="#ffffff"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"/>
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/colorAccent"
+            android:drawablePadding="10dp"
+            android:gravity="center_vertical"
+            android:onClick="@{v::onClick}"
+            android:text="text1" />
+
+        <TextView
+            android:id="@+id/text1"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="50dp"
+            android:background="@color/colorAccent"
+            android:drawablePadding="10dp"
+            android:gravity="center_vertical"
+            android:onClick="@{v::onClick}"
+            android:text="text2" />
+
+        <FrameLayout
+            android:id="@+id/fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="600dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#00000000"
+                android:orientation="vertical">
+
+                <ImageView
+                    circle="@{true}"
+                    imageUrl="@{vm.gifUrl}"
+                    strokeColor="@{@color/hlj_image_colorPrimary}"
+                    strokeWidth="@{1.5f}"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="10dp"
+                    android:contentDescription="@string/app_name" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="110dp"
+                android:background="#000000" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="320dp"
+                android:background="#000000" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="#000000" />
+        </FrameLayout>
+
+        <!--        <ImageView-->
+        <!--            circle="@{true}"-->
+        <!--            corner="@{10}"-->
+        <!--            cornerType="@{CornerType.OTHER_BOTTOM_RIGHT}"-->
+        <!--            height="@{vm.height}"-->
+        <!--            imageUrl="@{vm.imgErrorUrl}"-->
+        <!--            strokeColor="@{@color/hlj_image_colorPrimary}"-->
+        <!--            strokeWidth="@{1.5f}"-->
+        <!--            width="@{vm.deviceWidth}"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="200dp"-->
+        <!--            android:layout_marginStart="0.5dp"-->
+        <!--            android:layout_marginTop="10dp"-->
+        <!--            android:layout_marginEnd="0.5dp"-->
+        <!--            android:contentDescription="@string/app_name" />-->
+    </LinearLayout>
+</layout>

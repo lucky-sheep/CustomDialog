@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FF264A</color>
+    <color name="normalButtonBackground">#FFFFFF</color>
+    <color name="pressButtonBackground">#f6f6f7</color>
+</resources>
