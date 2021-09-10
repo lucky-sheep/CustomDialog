@@ -1,7 +1,7 @@
 package com.hunliji.hlj_dialog.core
 
 import android.app.Application
-import com.hunliji.integration_mw.ConfigModule
+import com.xueyu.applicationproxy.ConfigModule
 import kotlin.properties.Delegates
 
 /**

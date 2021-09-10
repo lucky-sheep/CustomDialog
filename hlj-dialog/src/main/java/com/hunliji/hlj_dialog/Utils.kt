@@ -3,12 +3,7 @@ package com.hunliji.hlj_dialog
 import android.app.Activity
 import android.content.Context
 import android.content.ContextWrapper
-import android.graphics.Point
 import android.util.TypedValue
-import android.view.WindowManager
-import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
-import com.hunliji.ext_master.toolbarHeight
 import com.hunliji.hlj_dialog.core.app
 
 /**

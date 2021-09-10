@@ -4,10 +4,8 @@ import android.content.Context
 import android.view.View
 import com.bigkoo.pickerview.builder.TimePickerBuilder
 import com.bigkoo.pickerview.view.TimePickerView
-import com.hunliji.ext_master.isNavBarOnBottom
-import com.hunliji.ext_master.navigationBarHeight
-import com.hunliji.ext_master.statusBarHeight
 import com.hunliji.hlj_dialog.xpopup.util.XPopupUtils
+import com.xueyu.kotlinextlibrary.navigationBarHeight
 import java.util.*
 
 /**

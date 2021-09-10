@@ -20,7 +20,6 @@ allprojects {
     repositories {
         google()
         jcenter()
-        maven { url 'http://172.16.12.102:8081/artifactory/libs-release-local/' }
         maven {
             url "https://jitpack.io"
         }

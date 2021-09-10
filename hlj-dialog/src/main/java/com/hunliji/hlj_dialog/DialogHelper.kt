@@ -12,8 +12,6 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import com.hunliji.ext_master.color
-import com.hunliji.ext_master.toolbarHeight
 import com.hunliji.hlj_dialog.model.*
 import com.hunliji.hlj_dialog.xpopup.XPopup
 import com.hunliji.hlj_dialog.xpopup.core.BasePopupView
@@ -21,6 +19,8 @@ import com.hunliji.hlj_dialog.xpopup.core.BottomPopupView
 import com.hunliji.hlj_dialog.xpopup.core.PartShadowPopupView
 import com.hunliji.hlj_dialog.xpopup.interfaces.SimpleCallback
 import com.hunliji.hlj_dialog.xpopup.widget.MaxHeightLinearLayout
+import com.xueyu.kotlinextlibrary.color
+import com.xueyu.kotlinextlibrary.toolbarHeight
 
 /**
  * DialogHelper
