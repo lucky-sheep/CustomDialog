@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.view.ViewParent;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -178,6 +179,38 @@ public abstract class BasePopupView extends FrameLayout implements OnNavigationB
         if (getParent() != null) return this;
         final Activity activity = (Activity) getContext();
         popupInfo.decorView = (ViewGroup) activity.getWindow().getDecorView();
+        KeyboardUtils.registerSoftInputChangedListener(activity, this, new KeyboardUtils.OnSoftInputChangedListener() {
+            @Override
+            public void onSoftInputChanged(int height) {
+                if (height == 0) { // 说明对话框隐藏
+                    XPopupUtils.moveDown(BasePopupView.this);
+                    hasMoveUp = false;
+                } else {
+                    //when show keyboard, move up
+                    XPopupUtils.moveUpToKeyboard(height, BasePopupView.this);
+                    hasMoveUp = true;
+                }
+            }
+        });
+        if (popupInfo.decorView != null) {
+            popupInfo.decorView.post(() -> {
+                if (getParent() != null) {
+                    ((ViewGroup) getParent()).removeView(BasePopupView.this);
+                }
+                if (popupInfo.decorView != null) {
+                    popupInfo.decorView.addView(BasePopupView.this, new LayoutParams(LayoutParams.MATCH_PARENT,
+                            LayoutParams.MATCH_PARENT));
+                    init();
+                }
+            });
+        }
+        return this;
+    }
+
+    public BasePopupView show(Window window) {
+        if (getParent() != null) return this;
+        final Activity activity = (Activity) getContext();
+        popupInfo.decorView = (ViewGroup) window.getDecorView();
         KeyboardUtils.registerSoftInputChangedListener(activity, this, new KeyboardUtils.OnSoftInputChangedListener() {
             @Override
             public void onSoftInputChanged(int height) {

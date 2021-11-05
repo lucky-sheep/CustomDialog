@@ -9,6 +9,7 @@ import android.graphics.drawable.StateListDrawable
 import android.text.TextUtils
 import android.view.Gravity
 import android.view.View
+import android.view.Window
 import android.view.WindowManager
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -331,6 +332,38 @@ fun Context.showDialogBottom(
         })
         .asCustom(popUp)
         .show()
+}
+
+fun Context.showDialogToDialogBottom(
+    window: Window,
+    popUp: BottomPopupView,
+    init: (XPopBuilder.() -> Unit)? = null
+) {
+    val builder = if (init != null) XPopBuilder().also(init) else null
+    val showBg = builder == null || builder.getShowBehind()
+    XPopup.Builder(this)
+        .hasShadowBg(showBg)
+        .dismissOnTouchOutside(builder?.getDismissOnTouchOutSide() ?: true)
+        .moveUpToKeyboard(false)
+        .setPopupCallback(object : SimpleCallback() {
+            override fun beforeShow() {
+                builder?.getBeforeShow()?.invoke()
+            }
+
+            override fun beforeDismiss() {
+                builder?.getBeforeDismiss()?.invoke()
+            }
+
+            override fun onShow() {
+                builder?.getShow()?.invoke()
+            }
+
+            override fun onDismiss() {
+                builder?.getDismiss()?.invoke()
+            }
+        })
+        .asCustom(popUp)
+        .show(window)
 }
 
 fun Context.createDialogPartShadow(
